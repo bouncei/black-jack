@@ -1,0 +1,44 @@
+.container {
+    width: 75%;
+    margin: 0 auto ;
+    border: 1px solid black;
+    text-align: center;
+}
+
+
+.flex-box-blackjack-row-1, .flex-box-blackjack-row-2, .flex-box-blackjack-row-3{
+    display: flex;
+    padding: 10px;
+    border: 1px solid black;
+    justify-content: center;
+}
+
+.flex-box-blackjack-row-1, .flex-box-blackjack-row-2{
+    background: url("https://media.istockphoto.com/photos/green-poker-background-picture-id453187915?k=20&m=453187915&s=612x612&w=0&h=yDGWRSaErS7B6MPaJ8g9PyaH0JqwGk4IfwnKpnsNYEQ=");
+    color: white;
+}
+
+.flex-box-blackjack-row-1 div{
+    /* display: flex; */
+    border: 1px solid black;
+    height: 350px;
+    text-align: center;
+    flex: 1;
+}
+
+.flex-box-blackjack-row-2 button{
+    margin:0px 8px;
+    padding: 10px;
+    /* border: 1px solid black; */
+}
+
+table, th, td{
+    border: 1px solid black;
+    padding: 5px;
+}
+
+
+button:hover {
+    transform: scale(1.09) !important;
+    
+}

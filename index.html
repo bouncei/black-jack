@@ -17,14 +17,49 @@
 </head>
 <body>
     <div class="container">
-        <h3 class="text center" >Black Jack</h3>
-        <h2><span></span></h2>
-        <div class="flex-box-color">
-           
-            
+        <h2 class="text center" >Black Jack Challenge</h2>
+        <h3><span>Let's Play</span></h3>
+        <div class="flex-box-blackjack-row-1">
+            <div class="your-box">
+                    <h2>You: <span class="your-blackjack-result">
+                        0
+                    </span>
+                    </h2>
+
+            </div>
+
+            <div class="dealer-box">
+                <h2>Dealer: <span class="dealer-blackjack-result">
+                    0
+                </span>
+                </h2>
+
+            </div>
+      
         </div>
 
-           
+        <div class="flex-box-blackjack-row-2">
+            <button class="btn btn-info btn-lg mr-3" id="blackjack-hit-button">Hit</button>
+            <button class="btn btn-warning btn-lg mr-3" id="blackjack-stand-button">Stand</button>
+            <button class="btn btn-danger btn-lg mr-3" id="blackjack-deal-button">Deal</button> 
+
+        </div>
+
+        <div class="flex-box-blackjack-row-3">
+            <table>
+                <tr>
+                    <th>Wins</th>
+                    <th>Losses</th>
+                    <th>Draws</th>
+
+                    
+                </tr>
+                <tr>
+                    <td><span id="wins">0</span></td>
+                    <td><span id="losses">0</span></td>
+                    <td><span id="draws">0</span></td>
+                </tr>
+            </table>
 
         </div>
     </div>
