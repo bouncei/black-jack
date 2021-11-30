@@ -42,3 +42,15 @@ button:hover {
     transform: scale(1.09) !important;
     
 }
+
+#your-box img{
+    height: 120;
+    width: 100;
+    padding: 10px;
+}
+
+#dealer-box img{
+    height: 120;
+    width: 100;
+    padding: 10px;
+}
