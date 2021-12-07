@@ -29,15 +29,23 @@ function buttonHit() {
     // console.log(card);
     showCard(card, YOU);
     updateSCore(card, YOU)
+    showScore(YOU)
+    
+
     
 }
 
 
 function showCard(card, activePlayer) {
-    let cardImage = document.createElement('img');
-    cardImage.src = `static/images/${card}.png`;
-    document.querySelector(activePlayer['div']).appendChild(cardImage);
-    hitSound.play();
+    if (activePlayer['score'] <= 21){
+        let cardImage = document.createElement('img');
+        cardImage.src = `static/images/${card}.png`;  // Fomatting in js
+        document.querySelector(activePlayer['div']).appendChild(cardImage);
+        hitSound.play();
+
+    }
+
+    
 
 }
 
@@ -52,6 +60,16 @@ function buttonDeal() {
     for(i=0; i < dealerImagers; i++){
         dealerImagers[i].remove()
     }
+
+    YOU['score'] = 0;
+    DEALER['score'] = 0;
+
+    document.querySelector("#your-blackjack-result").textContent = 0;
+    document.querySelector("#dealer-blackjack-result").textContent = 0;
+
+    document.querySelector('#your-blackjack-result'). style.color = "#ffffff"
+    document.querySelector('#dealer-blackjack-result'). style.color = "#ffffff"
+
 }
 
 
@@ -60,9 +78,75 @@ function buttonDeal() {
 
 
 function updateSCore(card, activePlayer){
-    activePlayer['score'] += blackjackGame['cardsMap'][card];
+    if (card === 'A'){
+        if (activePlayer['score'] + blackjackGame['cardsMap'][card][1] <= 21){
+            activePlayer['score'] += blackjackGame['cardsMap'][card][1];
+        }else{
+            activePlayer['score'] += blackjackGame['cardsMap'][card][0];
+        }
+
+    }else{
+        activePlayer['score'] += blackjackGame['cardsMap'][card];
+
+    }
+    console.log(activePlayer['score'])
 }
 
 function showScore(activePlayer){
-    document.querySelector(activePlayer['scoreSpan']).textContent = activePlayer['score']
+    if (activePlayer['score'] > 21){
+        document.querySelector(activePlayer['scoreSpan']).textContent = "BUST!";
+        document.querySelector(activePlayer['scoreSpan']).style.color = "red";
+
+    }else{
+        document.querySelector(activePlayer['scoreSpan']).textContent = activePlayer['score'];
+
+
+    }
+}
+
+
+
+
+function dealerLogic() {
+    let card = randToRpsInt();
+    showCard(card, DEALER);
+    updateSCore(card, DEALER);
+    showScore(DEALER);
+
+}
+
+
+// computes winner and returns who won
+
+function computeWinner() {
+    let winner;
+    
+    if (YOU[score] <= 21) {
+        if (YOU['score'] > DEALER['score'] || DEALER['score'] > 21){
+            alert('y0u won!');
+            winner = YOU;
+    
+        }else if (YOU['score'] < DEALER['score']){
+            alert('Lost Bruh');
+            winner = DEALER;
+    
+        }else if (YOU['score'] === DEALER['score']){
+            alert('Drew!');
+    
+        }
+
+    // condition: when user busts but dealer doesn't
+    }else if (YOU['score'] > 21 && DEALER['score'] <= 21){
+        alert('You Lost');
+        winner = DEALER;            
+
+    }else if (YOU['score'] > 21 && DEALER['score'] > 21){
+        alert('Drew!');
+    }
+
+
+    return winner
+    
+
+    
 }
