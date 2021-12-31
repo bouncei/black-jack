@@ -16,6 +16,9 @@ const YOU = blackjackGame['you']
 const DEALER = blackjackGame['dealer']
 
 const hitSound = new Audio('static/sounds/swish.m4a')
+const winSound = new Audio('static/sounds/cash.mp3')
+const lossSound = new Audio('static/sounds/aww.mp3')
+
 
 
 
@@ -30,8 +33,6 @@ function buttonHit() {
     showCard(card, YOU);
     updateSCore(card, YOU)
     showScore(YOU)
-    
-
     
 }
 
@@ -112,6 +113,7 @@ function dealerLogic() {
     showCard(card, DEALER);
     updateSCore(card, DEALER);
     showScore(DEALER);
+    showResult()
 
 }
 
@@ -123,11 +125,11 @@ function computeWinner() {
     
     if (YOU[score] <= 21) {
         if (YOU['score'] > DEALER['score'] || DEALER['score'] > 21){
-            alert('y0u won!');
+            alert('You Won!');
             winner = YOU;
     
         }else if (YOU['score'] < DEALER['score']){
-            alert('Lost Bruh');
+            alert('Lost Bruh!');
             winner = DEALER;
     
         }else if (YOU['score'] === DEALER['score']){
@@ -140,13 +142,42 @@ function computeWinner() {
         alert('You Lost');
         winner = DEALER;            
 
+    // condition: When Both user and dealer busts
     }else if (YOU['score'] > 21 && DEALER['score'] > 21){
         alert('Drew!');
     }
 
-
+    console.log('winner is', winner)
     return winner
     
 
     
+}
+
+// Display the winner on the Frontend
+function showResult(winner){
+
+    let messaage, messaageColor;
+    if (winner === YOU){
+        messaage = 'You Won!';
+        messaageColor = 'green';
+        winSound.play();
+
+    }
+
+    else if (winner === DEALER){
+        messaage = 'You Lost!';
+        messaageColor = 'red';
+        lossSound.play();
+
+    }
+    else{
+        messaage = 'You Drew!';
+        messaageColor = 'black';
+    }
+
+    document.querySelector('#blackjack-result').textContent = messaage;
+    document.querySelector('#blackjack-result').style.color = messaageColor;
+
+
 }
