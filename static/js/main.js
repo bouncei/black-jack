@@ -129,36 +129,39 @@ function showScore(activePlayer){
     }
 }
 
+// Setting some advanced js by adding an asynchrous function
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
 
 
 
-function dealerLogic() {
+// async function
+async function dealerLogic() {
     blackjackGame['isStand'] = true; 
 
-    if (DEALER['score'] <= 15){
+    while (DEALER['score'] <= 15 && blackjackGame['isStand'] === true){
         let card = randToRpsInt();
         showCard(card, DEALER);
         updateSCore(card, DEALER);
         showScore(DEALER);
+        
+        await sleep(1000);
 
-        if (DEALER['score'] > 15){
-            blackjackGame['turnOver'] = true;
-            let winner = computeWinner()
-            showResult(winner)
-    
-            document.querySelector('#wins').textContent = blackjackGame['wins'];
-            document.querySelector('#losses').textContent = blackjackGame['losses'];
-            document.querySelector('#draws').textContent = blackjackGame['draws'];
-    
-    
-        }
-    }else {
-        console.log("You're a boss my gee!")
+
     }
+    blackjackGame['turnOver'] = true;
+    let winner = computeWinner()
+    showResult(winner)
+
+    document.querySelector('#wins').textContent = blackjackGame['wins'];
+    document.querySelector('#losses').textContent = blackjackGame['losses'];
+    document.querySelector('#draws').textContent = blackjackGame['draws'];
+
     
     
 
-    console.log(blackjackGame)
+    // console.log(blackjackGame)
 
 }
 
